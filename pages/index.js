@@ -1,9 +1,72 @@
 import Head from "next/head";
+import Error from "next/error";
 import Image from "next/image";
 import cn from "classnames";
 import styles from "../styles/Home.module.css";
+import { getRecord } from "../utils";
 
-export default function Home() {
+const espressoAndCoffeeGroupTag = "espresso-and-coffee";
+const icedColdbrewGroupTag = "iced-cold-brew";
+const menuApi = "https://menu-api.raydiant.com/v1/groups";
+const apiKey = process.env.RAYDIANT_MENU_API_KEY ?? "";
+
+export const getServerSideProps = async (context) => {
+  const { menu, footnote } = context.query;
+
+  // Set the response status code to BadRequest if missing the menu query param.
+  if (!menu) {
+    context.res.statusCode = 400;
+    return {
+      props: {
+        errorCode: context.res.statusCode,
+        errorTitle: "Please provide a menu",
+      },
+    };
+  }
+
+  // Make request to the On-Brand Menu API.
+  const res = await fetch(`${menuApi}?menus=${menu}&depth=4`, {
+    headers: { "X-API-Key": apiKey },
+  });
+  // Forward the response status code from the On-Brand Menu API.
+  if (!res.ok) {
+    context.res.statusCode = res.status;
+    return {
+      props: {
+        errorCode: context.res.statusCode,
+        errorTitle: `Failed to load Starbucks menu for ${menu}`,
+      },
+    };
+  }
+
+  const data = await res.json();
+  const starbucksData = data.groups[0];
+
+  return {
+    props: {
+      data: starbucksData,
+      footnote: footnote || "",
+    },
+  };
+};
+
+export default function Home({ errorCode, errorTitle, data, footnote }) {
+  console.log({ errorCode, errorTitle, data, footnote });
+
+  if (errorCode) {
+    return <Error statusCode={errorCode} title={errorTitle} />;
+  }
+
+  if (!data) {
+    return null;
+  }
+
+  const { groups } = data;
+  if (!groups) return;
+
+  const espressoAndCoffeeData = getRecord(groups, espressoAndCoffeeGroupTag);
+  console.log(espressoAndCoffeeData);
+
   return (
     <div className={styles.container}>
       <Head>
