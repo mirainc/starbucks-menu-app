@@ -1,9 +1,11 @@
 import Head from "next/head";
 import Error from "next/error";
-import Image from "next/image";
 import cn from "classnames";
 import styles from "../styles/Home.module.css";
 import { getRecord } from "../utils";
+import MenuItem from "../components/MenuItem";
+import Modifier from "../components/Modifier";
+import ColdbrewMenuItems from "../components/ColdbrewMenuItem";
 
 const espressoAndCoffeeGroupTag = "espresso-and-coffee";
 const icedColdbrewGroupTag = "iced-cold-brew";
@@ -11,7 +13,12 @@ const menuApi = "https://menu-api.raydiant.com/v1/groups";
 const apiKey = process.env.RAYDIANT_MENU_API_KEY ?? "";
 
 export const getServerSideProps = async (context) => {
-  const { menu, footnote } = context.query;
+  const {
+    menu,
+    footnote = "",
+    espressoAndCoffeeSubheading = "",
+    espressoAndCoffeeBottomText = "",
+  } = context.query;
 
   // Set the response status code to BadRequest if missing the menu query param.
   if (!menu) {
@@ -25,7 +32,7 @@ export const getServerSideProps = async (context) => {
   }
 
   // Make request to the On-Brand Menu API.
-  const res = await fetch(`${menuApi}?menus=${menu}&depth=4`, {
+  const res = await fetch(`${menuApi}?menus=${menu}&depth=5`, {
     headers: { "X-API-Key": apiKey },
   });
   // Forward the response status code from the On-Brand Menu API.
@@ -40,19 +47,25 @@ export const getServerSideProps = async (context) => {
   }
 
   const data = await res.json();
-  const starbucksData = data.groups[0];
 
   return {
     props: {
-      data: starbucksData,
-      footnote: footnote || "",
+      data,
+      footnote,
+      espressoAndCoffeeSubheading,
+      espressoAndCoffeeBottomText,
     },
   };
 };
 
-export default function Home({ errorCode, errorTitle, data, footnote }) {
-  console.log({ errorCode, errorTitle, data, footnote });
-
+export default function Home({
+  errorCode,
+  errorTitle,
+  data,
+  footnote,
+  espressoAndCoffeeSubheading,
+  espressoAndCoffeeBottomText,
+}) {
   if (errorCode) {
     return <Error statusCode={errorCode} title={errorTitle} />;
   }
@@ -65,10 +78,31 @@ export default function Home({ errorCode, errorTitle, data, footnote }) {
   if (!groups) return;
 
   const espressoAndCoffeeData = getRecord(groups, espressoAndCoffeeGroupTag);
-  console.log(espressoAndCoffeeData);
+  const espressoAndCoffeeItems = espressoAndCoffeeData.items;
+  const espressoAndCoffeeModifiers = espressoAndCoffeeData.groups[0];
+
+  // Column 1 content
+  const minColumn1Items = 0;
+  const maxColumn1Items = 4;
+  const maxModifiers = 3;
+  const espressoMenuColumn1Content = espressoAndCoffeeItems.slice(
+    minColumn1Items,
+    maxColumn1Items
+  );
+
+  // Column 2 content
+  const minColumn2Items = 4;
+  const maxColumn2Items = 9;
+  const espressoMenuColumn2Content = espressoAndCoffeeItems.slice(
+    minColumn2Items,
+    maxColumn2Items
+  );
+
+  const icedColdbrewData = getRecord(groups, icedColdbrewGroupTag);
+  const maxIcedColdbrewItems = 3;
 
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Starbucks App</title>
         <meta name="description" content="A simple custom menu app." />
@@ -78,12 +112,20 @@ export default function Home({ errorCode, errorTitle, data, footnote }) {
       <main className={styles.mainLayout}>
         <section className={styles.espressoAndCoffeeMenuGroup}>
           <header>
-            <h1>Test</h1>
-            <h2 className="h2 subheading">Test</h2>
+            <h1>{espressoAndCoffeeData.name}</h1>
+            <h2 className="h2 subheading">{espressoAndCoffeeSubheading}</h2>
           </header>
           <div className={styles.espressoAndCoffeeMenuItems}>
-            <div>Column A</div>
-            <div>Column B</div>
+            <div>
+              {espressoMenuColumn1Content.map((c) => (
+                <MenuItem key={c.id} {...c} />
+              ))}
+            </div>
+            <div>
+              {espressoMenuColumn2Content.map((c) => (
+                <MenuItem key={c.id} {...c} />
+              ))}
+            </div>
           </div>
 
           <div>
@@ -91,7 +133,11 @@ export default function Home({ errorCode, errorTitle, data, footnote }) {
           </div>
 
           <div className={styles.espressoAndCoffeeModifiers}>
-            Modifiers here
+            {espressoAndCoffeeModifiers.items
+              .slice(0, maxModifiers)
+              .map((m) => (
+                <Modifier key={m.id} {...m} />
+              ))}
           </div>
 
           <div className={styles.espressoAndCoffeeBottomTextContainer}>
@@ -101,9 +147,7 @@ export default function Home({ errorCode, errorTitle, data, footnote }) {
                 "h2",
                 styles.espressoAndCoffeeBottomText
               )}
-            >
-              Heading here
-            </h2>
+            ></h2>
           </div>
         </section>
 
@@ -111,7 +155,11 @@ export default function Home({ errorCode, errorTitle, data, footnote }) {
           <header>
             <h1>Heading here</h1>
           </header>
-          <div className={styles.coldbrewMenuItems}>Items here</div>
+          <div className={styles.coldbrewMenuItems}>
+            {icedColdbrewData.items.slice(0, maxIcedColdbrewItems).map((i) => (
+              <ColdbrewMenuItems key={i.id} {...i} />
+            ))}
+          </div>
         </section>
       </main>
     </div>

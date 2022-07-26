@@ -1,0 +1,20 @@
+.root {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-right: calc(var(--spacing-unit) * 3.125);
+}
+
+.root:not(:last-child) {
+  margin-bottom: calc(var(--spacing-unit) * 3.5);
+}
+
+.imageContainer {
+  width: 220px;
+  margin-right: calc(var(--spacing-unit) * 5.875);
+}
+
+.imageContainer img {
+  width: 220px;
+  margin-bottom: -18px;
+}
