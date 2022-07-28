@@ -43,7 +43,7 @@ export const getServerSideProps = async (context) => {
     return {
       props: {
         errorCode: context.res.statusCode,
-        errorTitle: `Failed to load Starbucks menu for ${menu}`,
+        errorTitle: `Failed to load menu for ${menu}`,
       },
     };
   }

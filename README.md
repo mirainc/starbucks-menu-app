@@ -2,7 +2,7 @@
 
 ## URLs
 
-_Note: Instructions on how to fetch `menuIds` for a given API key are available in the "Multi-location support" section below._
+_Note: Instructions on how to fetch menu IDs for a given API key are available in the "Multi-location support" section below._
 
 _Example menuId: 3404a063-2bbe-4473-bb1b-cac3c7e1d14e_
 
