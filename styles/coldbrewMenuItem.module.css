@@ -6,11 +6,16 @@
 }
 
 .root:not(:last-child) {
-  margin-bottom: calc(var(--spacing-unit) * 3.5);
+  margin-bottom: calc(var(--spacing-unit) * 2.75);
+}
+
+.text {
+  margin-top: calc(var(--spacing-unit) * -0.75);
 }
 
 .imageContainer {
-  width: 220px;
+  display: flex;
+  min-width: 220px;
   margin-right: calc(var(--spacing-unit) * 5.875);
 }
 
