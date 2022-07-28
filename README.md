@@ -22,7 +22,9 @@ _Example menuId: 3404a063-2bbe-4473-bb1b-cac3c7e1d14e_
 
 ## Development
 
-E.g.
+1. Run `cp .env.sample .env.local` and populate env vars
+
+2. Run the development server
 
 ```bash
 yarn dev
