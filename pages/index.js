@@ -1,23 +1,23 @@
-import Head from "next/head";
-import Error from "next/error";
-import cn from "classnames";
-import styles from "../styles/Home.module.css";
-import { getRecord } from "../utils";
-import MenuItem from "../components/MenuItem";
-import Modifier from "../components/Modifier";
-import ColdbrewMenuItems from "../components/ColdbrewMenuItem";
+import Head from 'next/head';
+import Error from 'next/error';
+import cn from 'classnames';
+import styles from '../styles/Home.module.css';
+import { getRecord } from '../utils';
+import MenuItem from '../components/MenuItem';
+import Modifier from '../components/Modifier';
+import ColdbrewMenuItems from '../components/ColdbrewMenuItem';
 
-const espressoAndCoffeeGroupTag = "espresso-and-coffee";
-const icedColdbrewGroupTag = "iced-cold-brew";
-const menuApi = "https://menu-api.raydiant.com/v1/groups";
-const apiKey = process.env.RAYDIANT_MENU_API_KEY ?? "";
+const espressoAndCoffeeGroupTag = 'espresso-and-coffee';
+const icedColdbrewGroupTag = 'iced-cold-brew';
+const menuApi = 'https://menu-api.raydiant.com/v1/groups';
+const apiKey = process.env.RAYDIANT_MENU_API_KEY ?? '';
 
 export const getServerSideProps = async (context) => {
   const {
     menu,
-    footnote = "",
-    espressoAndCoffeeSubheading = "",
-    espressoAndCoffeeBottomText = "",
+    footnote = '',
+    espressoAndCoffeeSubheading = '',
+    espressoAndCoffeeBottomText = '',
   } = context.query;
 
   // Set the response status code to BadRequest if missing the menu query param.
@@ -26,14 +26,14 @@ export const getServerSideProps = async (context) => {
     return {
       props: {
         errorCode: context.res.statusCode,
-        errorTitle: "Please provide a menu",
+        errorTitle: 'Please provide a menu',
       },
     };
   }
 
   // Make request to the On-Brand Menu API.
   const res = await fetch(`${menuApi}?menus=${menu}&depth=5`, {
-    headers: { "X-API-Key": apiKey },
+    headers: { 'X-API-Key': apiKey },
   });
   // Forward the response status code from the On-Brand Menu API.
   if (!res.ok) {
@@ -87,7 +87,7 @@ export default function Home({
   const maxModifiers = 3;
   const espressoMenuColumn1Content = espressoAndCoffeeItems.slice(
     minColumn1Items,
-    maxColumn1Items
+    maxColumn1Items,
   );
 
   // Column 2 content
@@ -95,7 +95,7 @@ export default function Home({
   const maxColumn2Items = 9;
   const espressoMenuColumn2Content = espressoAndCoffeeItems.slice(
     minColumn2Items,
-    maxColumn2Items
+    maxColumn2Items,
   );
 
   const icedColdbrewData = getRecord(groups, icedColdbrewGroupTag);
@@ -143,17 +143,21 @@ export default function Home({
           <div className={styles.espressoAndCoffeeBottomTextContainer}>
             <h2
               className={cn(
-                "subheading",
-                "h2",
-                styles.espressoAndCoffeeBottomText
+                'subheading',
+                'h2',
+                styles.espressoAndCoffeeBottomText,
               )}
-            ></h2>
+            >
+              {espressoAndCoffeeBottomText}
+            </h2>
           </div>
+
+          <footer>{footnote}</footer>
         </section>
 
         <section className={styles.coldbrewMenuGroup}>
           <header>
-            <h1>Heading here</h1>
+            <h1>{icedColdbrewData.name}</h1>
           </header>
           <div className={styles.coldbrewMenuItems}>
             {icedColdbrewData.items.slice(0, maxIcedColdbrewItems).map((i) => (
