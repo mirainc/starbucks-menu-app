@@ -6,6 +6,8 @@ import { getRecord } from '../utils';
 import MenuItem from '../components/MenuItem';
 import Modifier from '../components/Modifier';
 import ColdbrewMenuItems from '../components/ColdbrewMenuItem';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 const espressoAndCoffeeGroupTag = 'espresso-and-coffee';
 const icedColdbrewGroupTag = 'iced-cold-brew';
@@ -66,6 +68,20 @@ export default function Home({
   espressoAndCoffeeSubheading,
   espressoAndCoffeeBottomText,
 }) {
+  const router = useRouter();
+
+  useEffect(() => {
+    const refreshData = () => {
+      router.replace(router.asPath);
+    };
+
+    const id = setInterval(() => {
+      refreshData();
+    }, 30000);
+
+    return () => clearInterval(id);
+  }, [router]);
+
   if (errorCode) {
     return <Error statusCode={errorCode} title={errorTitle} />;
   }

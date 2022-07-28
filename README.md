@@ -1,34 +1,75 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NextJS Custom Menu App
 
-## Getting Started
+## URLs
 
-First, run the development server:
+_Note: Instructions on how to fetch `menuIds` for a given API key are available in the "Multi-location support" section below._
+
+_Example menuId: 3404a063-2bbe-4473-bb1b-cac3c7e1d14e_
+
+**Localhost**
+
+- Main Menu Board: `http://localhost:3000?espressoAndCoffeeSubheading={espressoAndCoffeeSubheading}&espressoAndCoffeeBottomText={espressoAndCoffeeBottomText}&footnote={footnote}&menu={menuId}`
+
+**Production**
+
+<!-- - Main Menu Board: https://custom-menu-app-1.netlify.app?espressoAndCoffeeSubheading=<espressoAndCoffeeSubheading>&espressoAndCoffeeBottomText=<espressoAndCoffeeBottomText>&
+  footnote=<footnote>&menuId={menuId} -->
+
+## Prerequisities
+
+- Node
+- Yarn
+
+## Development
+
+E.g.
 
 ```bash
-npm run dev
-# or
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Adding App to Raydiant Platform
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+See [here](https://developers.raydiant.com/docs/get-started) for a comprehensive guide to building Raydiant apps.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Builder Inputs
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+There are three builder inputs for this project. These can be configured after creating a new app in [Raydiant's Developer portal](https://developers.raydiant.com/)
 
-## Learn More
+- Footnote (text input) - Corresponds to a query param
+  ![Footnote](footnote-builder-input.png)
+- Bottom Text (text input) - Corresponds to a query param
+  ![Bottom Text](espresso-and-coffee-bottom-text-builder-input.png)
+- Subheading (text input) - Corresponds to a query param
+  ![Subheading](espresso-and-coffee-subheading-builder-input.png)
 
-To learn more about Next.js, take a look at the following resources:
+[Code to retrieve query param](https://github.com/mirainc/custom-menu-samples/blob/8ae608baa41ffefbfc8cc63d0f0abc8011f97726/vanilla-js/js/scripts.js#L84-L88)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Multi-location/menu support
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+A couple of additional steps are required for multi-location/menu support.
 
-## Deploy on Vercel
+1. Using your API key, make a call to `/v1/menus` to retrieve the list of menus your API key has access to
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**cURL example:**
+
+```
+curl --location --request GET 'https://menu-api.raydiant.com/v1/menus' \
+--header 'x-api-key: <API_KEY>'
+```
+
+2. Take note of all the menu IDs required for your digital menu
+3. Go to the developer portal and select your app
+4. Creat a new "select" builder input
+5. Populate the "options" section with the aforementioned `menuIds`
+6. Confirm you can make an API request to fetch group data for a given menu/location
+
+```
+/v1/groups?tags=<tag>&menus=<menuId>depth=<depth>
+```
+
+## Deployment
+
+CI/CD is setup to deploy our apps using the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
