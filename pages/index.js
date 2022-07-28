@@ -77,7 +77,7 @@ export default function Home({
 
     const id = setInterval(() => {
       refreshData();
-    }, 30000);
+    }, 10000);
 
     return () => clearInterval(id);
   }, [router]);
