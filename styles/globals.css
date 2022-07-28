@@ -29,7 +29,7 @@ h1,
 h2,
 .h1,
 .h2 {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: 'Barlow Condensed', sans-serif;
 }
 
 h1 {
@@ -59,7 +59,7 @@ h2,
 }
 
 .subtitle {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 300;
   font-size: var(--font-size-md);
   letter-spacing: 1.2px;
@@ -78,7 +78,7 @@ html {
   background: var(--bg);
   color: var(--text-primary);
   font-size: var(--font-size-base);
-  font-family: "Nunito", sans-serif;
+  font-family: 'Nunito', sans-serif;
 }
 
 body {

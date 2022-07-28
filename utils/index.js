@@ -11,14 +11,14 @@ export const getTag = (tags, tagName) => {
     return x.includes(tagName);
   });
 
-  if (!record) return "";
+  if (!record) return '';
 
-  const [_tagKey, tagValue] = record.split(":");
+  const [_tagKey, tagValue] = record.split(':');
   return tagValue;
 };
 
 export const formatPrice = (number) => {
-  const priceFormatted = new Intl.NumberFormat("en-IN", {
+  const priceFormatted = new Intl.NumberFormat('en-IN', {
     minimumSignificantDigits: 3,
   }).format(number);
 
