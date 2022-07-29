@@ -1,0 +1,23 @@
+{
+  "name": "starbucks-menu-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "classnames": "^2.3.1",
+    "next": "12.2.2",
+    "normalize.css": "^8.0.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "eslint": "8.20.0",
+    "eslint-config-next": "12.2.2",
+    "prettier": "2.7.1"
+  }
+}
