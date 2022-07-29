@@ -12,8 +12,7 @@ _Example menuId: 3404a063-2bbe-4473-bb1b-cac3c7e1d14e_
 
 **Production**
 
-- Main Menu Board: https://custom-menu-app-1.netlify.app?espressoAndCoffeeSubheading=<espressoAndCoffeeSubheading>&espressoAndCoffeeBottomText=<espressoAndCoffeeBottomText>&
-  footnote=<footnote>&menuId={menuId}
+- Main Menu Board: `https://starbucks-menu-app.vercel.app?espressoAndCoffeeSubheading={espressoAndCoffeeSubheading}&espressoAndCoffeeBottomText={espressoAndCoffeeBottomText}& footnote={footnote}&menu={menu}`
 
 ## Prerequisities
 
