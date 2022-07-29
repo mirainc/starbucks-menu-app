@@ -168,7 +168,8 @@ export default function Home({
             </h2>
           </div>
 
-          <footer>{footnote}</footer>
+          {/* Ensure new line characters are respected by setting white space to "pre-wrap" */}
+          <footer style={{ whiteSpace: 'pre-wrap' }}>{footnote}</footer>
         </section>
 
         <section className={styles.coldbrewMenuGroup}>
