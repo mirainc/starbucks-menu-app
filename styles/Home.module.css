@@ -31,7 +31,10 @@
 }
 
 .coldbrewMenuGroup {
-  padding: calc(var(--spacing-unit) * 5) calc(var(--spacing-unit) * 6);
+  padding-top: calc(var(--spacing-unit) * 5);
+  padding-bottom: calc(var(--spacing-unit) * 4);
+  padding-left: calc(var(--spacing-unit) * 6);
+  padding-right: calc(var(--spacing-unit) * 6);
 }
 
 .coldbrewMenuItems {
