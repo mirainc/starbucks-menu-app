@@ -29,7 +29,7 @@ _Example menuId: 3404a063-2bbe-4473-bb1b-cac3c7e1d14e_
 yarn dev
 ```
 
-## Adding App to Raydiant Platform
+## Adding Apps to Raydiant Platform
 
 See [here](https://developers.raydiant.com/docs/get-started) for a comprehensive guide to building Raydiant apps.
 
@@ -68,6 +68,12 @@ curl --location --request GET 'https://menu-api.raydiant.com/v1/menus' \
 ```
 /v1/groups?tags=<tag>&menus=<menuId>depth=<depth>
 ```
+
+## Offline Support
+
+All requests should have a Cache-Control header of at least `max-age=1` to support the on-device cache. See [`next.config.js`](./next.config.js) for how to set this in a NextJS app. 
+
+Check out our [offline support docs](https://developers.raydiant.com/docs/get-started/offline-support) for more info.
 
 ## Deployment
 
