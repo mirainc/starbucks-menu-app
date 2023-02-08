@@ -6,7 +6,7 @@
 .description {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: var(--font-size-sm);
-  letter-spacing: 1.2px;
+  letter-spacing: 0.063px;
   font-weight: 400;
 }
 
