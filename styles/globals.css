@@ -3,11 +3,11 @@
   --spacing-unit: 0.833vw;
   --bg: #1f3933;
   --text-primary: #fff;
-  --font-size-base: 1.146vw;
-  --font-size-xs: 0.729vw;
-  --font-size-sm: 0.938vw;
-  --font-size-md: 1.042vw;
-  --font-size-lg: 2.292vw;
+  --font-size-base: 1.37rem;
+  --font-size-xs: 0.875rem;
+  --font-size-sm: 1.125rem;
+  --font-size-md: 1.25rem;
+  --font-size-lg: 2.75vw;
 }
 
 /* Resets */
