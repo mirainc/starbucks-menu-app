@@ -1,6 +1,6 @@
 /* Variables */
 :root {
-  --spacing-unit: 0.833vw;
+  --spacing-unit: 1rem;
   --bg: #1f3933;
   --text-primary: #fff;
   --font-size-base: 1.37rem;
