@@ -15,11 +15,11 @@
 
 .imageContainer {
   display: flex;
-  min-width: 220px;
+  width: 13.75rem;
   margin-right: calc(var(--spacing-unit) * 5.875);
 }
 
 .imageContainer img {
-  width: 220px;
-  margin-bottom: -18px;
+  min-width: 13.75rem;
+  margin-bottom: -1.125rem;
 }
