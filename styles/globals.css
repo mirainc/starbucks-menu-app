@@ -1,13 +1,13 @@
 /* Variables */
 :root {
-  --spacing-unit: 0.833vw;
+  --spacing-unit: 1rem;
   --bg: #1f3933;
   --text-primary: #fff;
-  --font-size-base: 1.146vw;
-  --font-size-xs: 0.729vw;
-  --font-size-sm: 0.938vw;
-  --font-size-md: 1.042vw;
-  --font-size-lg: 2.292vw;
+  --font-size-base: 1.375rem;
+  --font-size-xs: 0.875rem;
+  --font-size-sm: 1.125rem;
+  --font-size-md: 1.25rem;
+  --font-size-lg: 2.75rem;
 }
 
 /* Resets */
@@ -34,7 +34,7 @@ h2,
 
 h1 {
   font-size: var(--font-size-lg);
-  letter-spacing: 0.521vw;
+  letter-spacing: 0.625rem;
   margin-bottom: calc(var(--spacing-unit) * 2.625);
 }
 
@@ -42,16 +42,16 @@ h2,
 .h2 {
   font-size: var(--font-size-base);
   font-weight: 500;
-  letter-spacing: 0.104vw;
+  letter-spacing: 0.125rem;
 }
 
 .subheading {
-  letter-spacing: 0.208vw;
+  letter-spacing: 0.25rem;
 }
 
 .title {
   margin-bottom: calc(var(--spacing-unit) * 0.5);
-  letter-spacing: 0.063vw;
+  letter-spacing: 0.075rem;
 }
 
 .title.out-of-stock {
@@ -62,7 +62,7 @@ h2,
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 300;
   font-size: var(--font-size-md);
-  letter-spacing: 0.063vw;
+  letter-spacing: 0.075rem;
   text-transform: uppercase;
 }
 
@@ -77,7 +77,7 @@ html {
   -webkit-font-smoothing: antialiased;
   background: var(--bg);
   color: var(--text-primary);
-  font-size: var(--font-size-base);
+  font-size: calc(100vmin / 1080 * 16);
   font-family: 'Nunito', sans-serif;
 }
 
