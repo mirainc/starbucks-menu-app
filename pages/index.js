@@ -72,7 +72,16 @@ export default function Home({
 
   useEffect(() => {
     const refreshData = () => {
-      router.replace(router.asPath);
+      // Strip hash from URL. The __raydiantWindowId hash is added by Raydiant to communicate
+      // with the Raydiant SDK for features such as Dynamic Duration. Unfortunately, this causes
+      // the browser to do a client-side navigation instead of a server-side navigation, which doesn't
+      // refresh the data. To work around this, we strip the hash from the URL before refreshing.
+      //
+      // If you need to use the Raydiant SDK with NextJS, we recommend using a library like swr or
+      // react query to handle data fetching. See this commit for an example of how to use react-query:
+      // https://github.com/mirainc/starbucks-menu-app/commit/436850c337730d4174b10cd396c177446c9c5ddb
+      const refreshUrl = router.asPath.split('#')[0];
+      router.replace(refreshUrl);
     };
 
     const id = setInterval(() => {
