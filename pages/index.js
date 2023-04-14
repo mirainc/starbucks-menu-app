@@ -1,18 +1,23 @@
 import Head from 'next/head';
 import Error from 'next/error';
 import cn from 'classnames';
+import { useQuery } from '@tanstack/react-query';
 import styles from '../styles/Home.module.css';
 import { getRecord } from '../utils';
 import MenuItem from '../components/MenuItem';
 import Modifier from '../components/Modifier';
 import ColdbrewMenuItems from '../components/ColdbrewMenuItem';
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
 
 const espressoAndCoffeeGroupTag = 'espresso-and-coffee';
 const icedColdbrewGroupTag = 'iced-cold-brew';
 const menuApi = 'https://menu-api.raydiant.com/v1/groups';
 const apiKey = process.env.RAYDIANT_MENU_API_KEY ?? '';
+
+const fetchMenuData = async (apiKey, menu) => {
+  return fetch(`${menuApi}?menus=${menu}&depth=5`, {
+    headers: { 'X-API-Key': apiKey },
+  });
+};
 
 export const getServerSideProps = async (context) => {
   const {
@@ -34,9 +39,7 @@ export const getServerSideProps = async (context) => {
   }
 
   // Make request to the On-Brand Menu API.
-  const res = await fetch(`${menuApi}?menus=${menu}&depth=5`, {
-    headers: { 'X-API-Key': apiKey },
-  });
+  const res = await fetchMenuData(apiKey, menu);
   // Forward the response status code from the On-Brand Menu API.
   if (!res.ok) {
     context.res.statusCode = res.status;
@@ -52,10 +55,12 @@ export const getServerSideProps = async (context) => {
 
   return {
     props: {
-      data,
+      initialData: data,
       footnote,
       espressoAndCoffeeSubheading,
       espressoAndCoffeeBottomText,
+      apiKey,
+      menu,
     },
   };
 };
@@ -63,24 +68,23 @@ export const getServerSideProps = async (context) => {
 export default function Home({
   errorCode,
   errorTitle,
-  data,
+  initialData,
   footnote,
   espressoAndCoffeeSubheading,
   espressoAndCoffeeBottomText,
+  apiKey,
+  menu,
 }) {
-  const router = useRouter();
-
-  useEffect(() => {
-    const refreshData = () => {
-      router.replace(router.asPath);
-    };
-
-    const id = setInterval(() => {
-      refreshData();
-    }, 10000);
-
-    return () => clearInterval(id);
-  }, [router]);
+  const { data } = useQuery({
+    queryKey: ['menus'],
+    queryFn: async () => {
+      const res = await fetchMenuData(apiKey, menu).json();
+      return await res.json();
+    },
+    refetchInterval: 1000 * 10, // Refetch every 10 seconds.
+    staleTime: 1000, // Prevent fetching data on page load.
+    initialData,
+  });
 
   if (errorCode) {
     return <Error statusCode={errorCode} title={errorTitle} />;
