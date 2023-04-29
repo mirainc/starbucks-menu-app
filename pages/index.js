@@ -20,7 +20,11 @@ export const getServerSideProps = async (context) => {
     footnote = '',
     espressoAndCoffeeSubheading = '',
     espressoAndCoffeeBottomText = '',
+    multi: multiSeralized = '',
   } = context.query;
+
+  console.log(multiSeralized);
+  const multi = JSON.parse(multiSeralized);
 
   // Set the response status code to BadRequest if missing the menu query param.
   if (!menu) {
@@ -56,6 +60,7 @@ export const getServerSideProps = async (context) => {
       footnote,
       espressoAndCoffeeSubheading,
       espressoAndCoffeeBottomText,
+      multi,
     },
   };
 };
@@ -67,6 +72,7 @@ export default function Home({
   footnote,
   espressoAndCoffeeSubheading,
   espressoAndCoffeeBottomText,
+  multi,
 }) {
   const router = useRouter();
 
@@ -188,6 +194,11 @@ export default function Home({
           <div className={styles.coldbrewMenuItems}>
             {icedColdbrewData.items.slice(0, maxIcedColdbrewItems).map((i) => (
               <ColdbrewMenuItems key={i.id} {...i} />
+            ))}
+            {multi.map((x) => (
+              <pre key={x}>
+                <code>{x}</code>
+              </pre>
             ))}
           </div>
         </section>
