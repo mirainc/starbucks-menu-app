@@ -6,16 +6,11 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: "/:all*(svg|jpg|png)",
-        locale: false,
+        source: '/',
         headers: [
           {
-            key: "Cache-Control",
-            value: "public, max-age=1",
-          },
-          {
-            key: 'x-hello',
-            value: 'world',
+            key: 'Cache-Control',
+            value: 'max-age=1',
           },
         ],
       },
