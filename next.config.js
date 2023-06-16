@@ -6,11 +6,16 @@ const nextConfig = {
         source: '/',
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'max-age=1',
+            key: 'X-Accel-Expires',
+            value: '1',
           },
+        ],
+      },
+      {
+        source: '/_next/data/:path*.json',
+        headers: [
           {
-            key: 'x-test',
+            key: 'X-Accel-Expires',
             value: '1',
           },
         ],
