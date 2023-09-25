@@ -1,4 +1,6 @@
-export const getRecord = (data, tag) => {
+import { MenuData, Record } from "../types";
+
+export const getRecord = (data: Record[], tag: string): Record | undefined => {
   const record = data.find((x) => {
     return x.tags.includes(tag);
   });

@@ -8,6 +8,8 @@ import Modifier from '../components/Modifier';
 import ColdbrewMenuItems from '../components/ColdbrewMenuItem';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import MenuLayout from '../components/MenuLayout';
+import StackedGroup from '../components/StackedGroup';
 
 const espressoAndCoffeeGroupTag = 'espresso-and-coffee';
 const icedColdbrewGroupTag = 'iced-cold-brew';
@@ -134,7 +136,7 @@ export default function Home({
         <meta name="author" content="Raydiant" />
       </Head>
 
-      <main className={styles.mainLayout}>
+      <MenuLayout>
         <section className={styles.espressoAndCoffeeMenuGroup}>
           <header>
             <h1>{espressoAndCoffeeData.name}</h1>
@@ -181,17 +183,12 @@ export default function Home({
           <footer style={{ whiteSpace: 'pre-wrap' }}>{footnote}</footer>
         </section>
 
-        <section className={styles.coldbrewMenuGroup}>
-          <header>
-            <h1>{icedColdbrewData.name}</h1>
-          </header>
-          <div className={styles.coldbrewMenuItems}>
-            {icedColdbrewData.items.slice(0, maxIcedColdbrewItems).map((i) => (
-              <ColdbrewMenuItems key={i.id} {...i} />
-            ))}
-          </div>
-        </section>
-      </main>
+        <StackedGroup heading={icedColdbrewData.name}>
+          {icedColdbrewData.items.slice(0, maxIcedColdbrewItems).map((i) => (
+            <ColdbrewMenuItems key={i.id} {...i} />
+          ))}
+        </StackedGroup>
+      </MenuLayout>
     </div>
   );
 }
