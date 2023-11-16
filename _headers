@@ -1,0 +1,11 @@
+# Headers for Netlify
+# Cache assets for maximum 5 seconds, then require revalidation, and fall
+# back to cache if there is an error (max 7 days).
+/*.*
+  cache-control: max-age=5
+  cache-control: stale-while-revalidate=604800
+  cache-control: stale-if-error=604800
+/*
+  cache-control: max-age=5
+  cache-control: stale-while-revalidate=604800
+  cache-control: stale-if-error=604800

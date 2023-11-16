@@ -1,0 +1,117 @@
+{
+  "headers": [
+    {
+      "source": "/",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=5, stale-while-revalidate=604800, stale-if-error=604800"
+        }
+      ]
+    },
+    {
+      "source": "(.*)\\.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=5, stale-while-revalidate=604800, stale-if-error=604800"
+        },
+        {
+          "key": "Content-Type",
+          "value": "text/javascript"
+        }
+      ]
+    },
+    {
+      "source": "(.*)\\.json",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=5, stale-while-revalidate=604800, stale-if-error=604800"
+        },
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    },
+    {
+      "source": "(.*)\\.css",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=5, stale-while-revalidate=604800, stale-if-error=604800"
+        },
+        {
+          "key": "Content-Type",
+          "value": "text/css"
+        }
+      ]
+    },
+    {
+      "source": "(.*)\\.png",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "image/png"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=5, stale-while-revalidate=604800, stale-if-error=604800"
+        }
+      ]
+    },
+    {
+      "source": "(.*)\\.jpg",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "image/jpeg"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=5, stale-while-revalidate=604800, stale-if-error=604800"
+        }
+      ]
+    },
+    {
+      "source": "(.*)\\.webp",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "image/webp"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=5, stale-while-revalidate=604800, stale-if-error=604800"
+        }
+      ]
+    },
+    {
+      "source": "(.*)\\.svg",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "image/svg+xml"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=5, stale-while-revalidate=604800, stale-if-error=604800"
+        }
+      ]
+    },
+    {
+      "source": "(.*)\\.ico",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "image/x-icon"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=5, stale-while-revalidate=604800, stale-if-error=604800"
+        }
+      ]
+    }
+  ]
+}
