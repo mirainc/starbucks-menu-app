@@ -15,7 +15,7 @@ const ColdbrewMenuItems = ({ name, price, calories, inStock, tags }) => {
   return (
     <div className={styles.root}>
       <div className={styles.imageContainer}>
-        <img src={tagImageMap[itemId]} alt="" width={220} height={220} />
+        <Image src={tagImageMap[itemId]} alt="" width={220} height={220} />
       </div>
       <div className={styles.text}>
         <div className={cn('title', inStock ? '' : ' out-of-stock')}>
